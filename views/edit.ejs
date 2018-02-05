@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <style>
+              *{
+                padding:0;
+                margin:0;
+            }
+            form{
+                width:220px;
+                margin: 0 auto;
+                padding-top:30px;
+            }
+            input{
+                display: inline;
+            }
+            .btn{
+                margin-top: 6px;
+                display: block;
+                margin-left:72px;
+            }
+            .sex{
+                display: inline;
+            }
+            div.radio{  
+                display:inline-block;
+            }
+            .title{
+                font-weight: bold;
+            }
+    </style>
+</head>
+<form action="/doedit/<%=student.sid%>" method="get" target="_blank">
+    <div class="form-group">
+            <label for="sid"></label><span class="title">学号：</span>
+            <input type="number" class="form-control" name="sid" id="sid" value="<%=student.sid%>">
+          </div>
+    <div class="form-group">
+      <label for="name"></label><span class="title">姓名：</span>
+      <input type="text" class="form-control" name="name" id="name" value="<%=student.name%>">
+    </div>
+    <div class="form-group">
+      <label for="age"></label><span class="title">年龄：</span>
+      <input type="number" name="age" class="form-control" id="age" value="<%=student.age%>">
+    </div>
+    <div class="radio"><p><span class="title">性别：</span></p>
+        <label class='sex'>
+          <input type="radio" class="sex" name="sex" id="male" value="男" <%if(student.sex=="男"){%> checked <%}%>>
+          男
+        </label>
+      </div>
+      <div class="radio">
+        <label class='sex'>
+          <input type="radio" class='sex' name="sex" id="female" value="女" <%if(student.sex=="女"){%> checked <%}%>>
+         女
+        </label>
+      </div>
+      <div>
+            <p><span class="title">选修课程：</span></p>
+          <%for(var i=0;i<course.length;i++){%>
+            <label class="checkbox-inline">
+            <input type="checkbox" name="courses"  value="<%=course[i].kid%>" <%if(course[i].students.indexOf(student.sid)!==-1){%> checked <%}%>> <%=course[i].name%>
+            </label> 
+            <%}%>
+      </div>
+    <button type="submit" class="btn btn-default">提交</button>
+  </form>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>index</title>
+    <style>
+        .container{
+            width: 66%;
+        }
+        h3{
+            display: block;
+            margin-left:43%; 
+        }
+    .add{
+        margin-left:45%;
+        margin-bottom: 20px;
+    }
+    .separated{
+        margin: 0 10px;
+    }
+    </style>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->   
+  </head>
+  <body>
+      <div class="container">
+      <h3>学生信息表</h3>
+      <a href="/add" target="_blank" class="add"><button>添加学生</button></a>
+        <table class="table table-hover">
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>已选课程</th>
+                    <th>操作</th>
+                </tr> 
+                <%for(var i=0;i<student.length;i++){
+                    var temparr=student[i].courses;
+                    var tempstr='';
+                    for(var index in temparr){
+                        for(var indexCourse in course){
+                            if(temparr[index]==course[indexCourse].kid){
+                            tempstr+=course[indexCourse].name+' ';
+                        }
+                    }
+                    }
+                    %>
+                    <tr>
+                    <td><%=student[i].sid%></td>
+                    <td><%=student[i].name%></td> 
+                    <td><%=student[i].age%></td> 
+                    <td><%=student[i].sex%></td> 
+                    <td><%=tempstr%></td>
+                    <td><a href="/edit/<%=student[i].sid%>" target="_blank">修改</a><span class="separated">|</span>
+                        <a href="/remove/<%=student[i].sid%>" target="_blank">删除</a>
+                    </td>
+                    </tr>
+                    <%}%>
+          </table>
+      </div>
+          <script src="/js/jquery.min.js"></script>
+          <!-- Include all compiled plugins (below), or include individual files as needed -->
+          <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>
